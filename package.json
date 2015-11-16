@@ -32,7 +32,7 @@
     "build": "webpack",
     "build-watch": "babel index.js --watch --out-file bundle.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch --watch-extensions jsx"
   },
   "repository": {
     "type": "git",
