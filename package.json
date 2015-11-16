@@ -3,25 +3,22 @@
   "version": "1.0.0",
   "description": "Taking a look at application architecture leveraging the [Redux framework](https://github.com/rackt/redux).",
   "main": "index.js",
-  "dependencies": {
-    "immutable": "^3.7.5",
-    "react": "^0.14.2",
-    "react-redux": "^4.0.0",
-    "redux": "^3.0.4"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "babel-cli": "^6.1.18",
     "babel-core": "^6.1.21",
+    "babel-loader": "^6.1.0",
     "babel-preset-es2015": "^6.1.18",
-    "redux-devtools": "^2.1.5"
+    "babel-preset-react": "^6.1.18",
+    "webpack": "^1.12.6",
+    "webpack-dev-server": "^1.12.1"
   },
   "babel": {
-    "presets": [
-      "es2015"
-    ]
+    "presets": ["es2015", "react"]
   },
   "scripts": {
-    "start": "babel-node index.js",
+    "start": "webpack-dev-server",
+    "build": "webpack",
+    "build-watch": "babel index.js --watch --out-file bundle.js",
     "test": "mocha --compilers js:babel-core/register  --require ./test/test_helper.js  --recursive",
     "test:watch": "npm run test -- --watch"
   },
