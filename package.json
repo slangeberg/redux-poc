@@ -4,7 +4,9 @@
   "description": "Taking a look at application architecture leveraging the [Redux framework](https://github.com/rackt/redux).",
   "main": "index.js",
   "dependencies": {
-    "immutable": "^3.7.5"
+    "immutable": "^3.7.5",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2"
   },
   "devDependencies": {
     "babel-core": "^6.1.21",
@@ -15,6 +17,7 @@
     "chai-immutable": "^1.5.2",
     "jsdom": "^7.0.2",
     "mocha": "^2.3.4",
+    "react-hot-loader": "^1.3.0",
     "webpack": "^1.12.6",
     "webpack-dev-server": "^1.12.1"
   },
@@ -28,7 +31,7 @@
     "start": "webpack-dev-server",
     "build": "webpack",
     "build-watch": "babel index.js --watch --out-file bundle.js",
-    "test":       "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch"
   },
   "repository": {
