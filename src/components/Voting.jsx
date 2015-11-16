@@ -1,6 +1,11 @@
 import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export default React.createClass({
+
+    //Immutable data ensures shallow change checks should pass - PureRenderMixin should be perf boost
+    mixins: [PureRenderMixin],
+
     getPair: function() {
         return this.props.pair || [];
     },
