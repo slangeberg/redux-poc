@@ -1,6 +1,7 @@
 import {List, Map} from 'immutable';
 
 function setConnectionState(state, connectionState, connected) {
+    console.log('reducer.setConnectionState(connectionState: ', connectionState, ', connected: ', connected);
     return state.set('connection', Map({
         state: connectionState,
         connected
@@ -38,11 +39,54 @@ function resetVote(state) {
     }
 }
 
+//Copied from server proj
+export function next(state, round = state.getIn(['vote', 'round'], 0)) {
+    const entries = state.get('entries')
+        .concat(getWinners(state.get('vote')));
+    if (entries.size === 1) {
+        return state.remove('vote')
+            .remove('entries')
+            .set('winner', entries.first());
+    } else {
+        return state.merge({
+            vote: Map({
+                round: round + 1,
+                pair: entries.take(2)
+            }),
+            entries: entries.skip(2)
+        });
+    }
+}
+
+//Copied from server proj
+export function restart(state) {
+    console.log('restart(', state.toJS());
+    const round = state.getIn(['vote', 'round'], 0);
+    return next(
+        state.set('entries', state.get('initialEntries'))
+            .remove('vote')
+            .remove('winner'),
+        round
+    );
+}
+
+//Copied from server proj
+export function setEntries(state, entries) {
+    console.log('reducer.setEntries(entries: ', entries);
+    const list = List(entries);
+    return state.set('entries', list)
+        .set('initialEntries', list);
+}
+
 export default function(state = Map(), action) {
 
     console.log('reducer(state: ', state.toJS(), ', action: ', action);
 
     switch (action.type) {
+        case 'SET_ENTRIES':
+            return setEntries(state, action.entries);
+        case 'RESTART':
+            return restart(state);
         case 'SET_CLIENT_ID':
             return state.set('clientId', action.clientId);
         case 'SET_CONNECTION_STATE':

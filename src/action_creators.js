@@ -38,7 +38,6 @@ export function next() {
 
 export function restart() {
   return {
-    meta: {remote: true},
     type: 'RESTART'
   };
 }
