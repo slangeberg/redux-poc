@@ -1,11 +1,6 @@
+
 import React from 'react';
-import {List} from 'immutable';
-
-const pair = List.of('Trainspotting', '28 Days Later');
-
-const vote = function() {
-    console.warn('App.vote() - NOT TBD');
-};
+import {ConnectionStateContainer} from './ConnectionState';
 
 export default React.createClass({
 
@@ -13,6 +8,9 @@ export default React.createClass({
     //https://github.com/rackt/react-router/issues/470
 
     render: function() {
-        return React.cloneElement(this.props.children, {pair: pair, vote: vote});
+        return <div>
+            <ConnectionStateContainer />
+            {this.props.children}
+        </div>
     }
 });

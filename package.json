@@ -4,6 +4,7 @@
   "description": "Taking a look at application architecture leveraging the [Redux framework](https://github.com/rackt/redux).",
   "main": "index.js",
   "dependencies": {
+    "classnames": "^2.2.0",
     "history": "^1.13.1",
     "immutable": "^3.7.5",
     "react": "^0.14.2",
