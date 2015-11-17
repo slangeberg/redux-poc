@@ -3,7 +3,7 @@ import {List} from 'immutable';
 
 const pair = List.of('Trainspotting', '28 Days Later');
 const vote = function() {
-    console.warn('App.vote() - TBD');
+    console.warn('App.vote() - NOT TBD');
 };
 
 export default React.createClass({
