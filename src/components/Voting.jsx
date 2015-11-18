@@ -11,6 +11,7 @@ export const Voting = React.createClass({
     //Immutable data ensures shallow change checks should pass - PureRenderMixin should be perf boost
     mixins: [PureRenderMixin],
     render: function() {
+        console.log('Voting.render()');
         return <div>
             {this.props.winner ?
             <Winner ref="winner" winner={this.props.winner} /> :
