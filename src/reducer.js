@@ -1,4 +1,8 @@
 import {List, Map} from 'immutable';
+import {
+   // SELECT_REDDIT, INVALIDATE_REDDIT,
+    REQUEST_POSTS, RECEIVE_POSTS
+} from './action_creators';
 
 function setConnectionState(state, connectionState, connected) {
     console.log('reducer.setConnectionState(connectionState: ', connectionState, ', connected: ', connected);
