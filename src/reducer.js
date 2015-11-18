@@ -43,6 +43,14 @@ function resetVote(state) {
     }
 }
 
+function requestPosts(state, reddit) {
+    console.log('reducer.requestPosts(', state.toJS(), reddit);
+    return state.set('isFetching', true)
+        .set('reddit', reddit);
+}
+
+/////////////////
+
 //Copied from server proj
 export function next(state, round = state.getIn(['vote', 'round'], 0)) {
     const entries = state.get('entries')
@@ -64,7 +72,7 @@ export function next(state, round = state.getIn(['vote', 'round'], 0)) {
 
 //Copied from server proj
 export function restart(state) {
-    console.log('restart(', state.toJS());
+    console.log('reducer.restart(', state.toJS());
     const round = state.getIn(['vote', 'round'], 0);
     return next(
         state.set('entries', state.get('initialEntries'))
@@ -87,6 +95,8 @@ export default function(state = Map(), action) {
     console.log('reducer(state: ', state.toJS(), ', action: ', action);
 
     switch (action.type) {
+        case REQUEST_POSTS:
+            return requestPosts(state, action.reddit);
         case 'SET_ENTRIES':
             return setEntries(state, action.entries);
         case 'RESTART':

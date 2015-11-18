@@ -13,9 +13,14 @@ export const Voting = React.createClass({
     render: function() {
         console.log('Voting.render()');
         return <div>
-            {this.props.winner ?
-            <Winner ref="winner" winner={this.props.winner} /> :
-            <Vote {...this.props} />}
+            <div>
+                isFetching: {this.props.isFetching}, reddit: {this.props.reddit}
+            </div>
+            <div>
+                {this.props.winner ?
+                <Winner ref="winner" winner={this.props.winner} /> :
+                <Vote {...this.props} />}
+            </div>
         </div>;
     }
 });
@@ -24,7 +29,9 @@ function mapStateToProps(state) {
     return {
         pair: state.getIn(['vote', 'pair']),
         hasVoted: state.getIn(['myVote', 'entry']),
-        winner: state.get('winner')
+        winner: state.get('winner'),
+        isFetching: state.get('isFetching'),
+        reddit: state.get('reddit')
     };
 }
 

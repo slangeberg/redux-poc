@@ -71,7 +71,9 @@ function receivePosts(reddit, json) {
 
 function fetchPosts(reddit) {
     return dispatch => {
+
         dispatch(requestPosts(reddit))
+
         return fetch('./entries.json') //`http://www.reddit.com/r/${reddit}.json`)
             .then(response => response.json())
             .then(json => dispatch(receivePosts(reddit, json)))
