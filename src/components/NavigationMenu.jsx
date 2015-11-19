@@ -3,6 +3,9 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 import {Map} from 'immutable';
 
+import * as actionCreators from '../action_creators';
+
+
 export const NavigationMenu = React.createClass({
 
     mixins: [PureRenderMixin],
@@ -13,6 +16,7 @@ export const NavigationMenu = React.createClass({
 
     selectSection: function(section) {
         console.log('NavigationMenu.selectSection(', section);
+        this.props.goToSection(section);
     },
 
     render: function () {
@@ -46,6 +50,12 @@ export const NavigationMenuContainer = connect(
          ]
      },
      */
-    state => state.get('navigation', Map()).toJS()
+    state => {
+        var navigation = state.get('navigation', Map());
+        //debugger;
+        console.log('NavigationMenuContainer.connect().map() - navigation: ', navigation);
+        return navigation.toJS()
+    },
+    actionCreators
 
 )(NavigationMenu);

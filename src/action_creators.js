@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-fetch'
 
 export const INIT = 'INIT';
+export const GO_TO_SECTION = 'GO_TO_SECTION';
+
 export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 //export const SELECT_REDDIT = 'SELECT_REDDIT'
@@ -11,6 +13,14 @@ const dataDir = './data';
 export function init() {
     return {
         type: INIT
+    }
+}
+
+export function goToSection(section) {
+    console.log('actions.goToSection(', section);
+    return {
+        type: GO_TO_SECTION,
+        section
     }
 }
 
@@ -89,22 +99,22 @@ function fetchPosts(reddit) {
     }
 }
 
-//function shouldFetchPosts(state, reddit) {
-//    const posts = state.postsByReddit[reddit]
-//    if (!posts) {
-//        return true
-//    }
-//    if (posts.isFetching) {
-//        return false
-//    }
-//    return posts.didInvalidate
-//}
+function shouldFetchPosts(state, reddit) {
+    const posts = state.postsByReddit[reddit]
+    if (!posts) {
+        return true
+    }
+    if (posts.isFetching) {
+        return false
+    }
+    return posts.didInvalidate
+}
 
 export function fetchPostsIfNeeded(reddit) {
     console.log('actions.fetchPostsIfNeeded(', reddit);
     return (dispatch, getState) => {
-        //if (shouldFetchPosts(getState(), reddit)) {
+        if (shouldFetchPosts(getState(), reddit)) {
             return dispatch(fetchPosts(reddit))
-        //}
+        }
     }
 }

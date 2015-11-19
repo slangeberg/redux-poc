@@ -1,6 +1,6 @@
 import {fromJS, List, Map} from 'immutable';
 import {
-    INIT,
+    INIT, GO_TO_SECTION,
    // SELECT_REDDIT, INVALIDATE_REDDIT,
     REQUEST_POSTS, RECEIVE_POSTS
 } from './action_creators';
@@ -144,6 +144,15 @@ export function setEntries(state, entries) {
         .set('initialEntries', list);
 }
 
+function goToSection(state, section) {
+    var updated = state.setIn(["navigation", "selectedSection"], section);
+    var hasChanged = updated !== state;
+
+    console.log('reducer.goToSection(section: ', section, ') - hasChanged: ', hasChanged);
+
+    return updated;
+}
+
 export default function(state = Map(), action) {
 
     console.log('reducer(state: ', state.toJS(), ', action: ', action);
@@ -151,6 +160,8 @@ export default function(state = Map(), action) {
     switch (action.type) {
         case INIT:
             return init();
+        case GO_TO_SECTION:
+            return goToSection(state, action.section);
         case REQUEST_POSTS:
             return requestPosts(state, action.reddit);
         case 'SET_ENTRIES':
