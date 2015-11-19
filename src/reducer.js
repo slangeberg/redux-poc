@@ -9,11 +9,13 @@ function init() {
     console.log('reducer.init()');
     var state = fromJS(
         {
-            "selectedSection": "travelerDetails",
-            "sections": [
-                { "id": "travelerDetails", "label": "Traveler Details", hasChanges: false },
-                { "id": "payment", "label": "Payment", hasChanges: false }
-            ],
+            "navigation": {
+                "selectedSection": "travelerDetails",
+                "sections": [
+                    {"id": "travelerDetails", "label": "Traveler Details", hasChanges: false},
+                    {"id": "payment", "label": "Payment", hasChanges: false}
+                ]
+            },
             "data": {
                 travelerDetails: {
                     travelerInformation: {

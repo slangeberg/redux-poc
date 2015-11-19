@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {ConnectionStateContainer} from './ConnectionState';
+import {NavigationMenuContainer} from './NavigationMenu';
 
 export default React.createClass({
 
@@ -9,7 +9,7 @@ export default React.createClass({
 
     render: function() {
         return <div>
-            <ConnectionStateContainer />
+            <NavigationMenuContainer />
             {this.props.children}
         </div>
     }
