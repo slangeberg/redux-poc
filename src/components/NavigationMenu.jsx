@@ -7,29 +7,32 @@ export const NavigationMenu = React.createClass({
 
     mixins: [PureRenderMixin],
 
-    getMessage: function () {
-        return `Selected: (${this.props.selectedSection})`;
-    },
     isSelected: function (section) {
         return this.props.selectedSection == section.id
     },
+
+    selectSection: function(section) {
+        console.log('NavigationMenu.selectSection(', section);
+    },
+
     render: function () {
         var comp = this;
-        return <div className="navigationMenu">
-            <div>{this.getMessage()}</div>
-            <div>
+        return (
+            <div className="navigationMenu">
                 <ul>
                     {
                         this.props.sections.map(function(section) {
-                            return <li key={section.id}
-                                       style={{fontWeight: comp.isSelected(section) ? 'bold' : 'normal'}}>
-                                {[section.label, section.hasChanges ? <b>&nbsp;*</b> : '']}
+                            var boundClicker = comp.selectSection.bind(comp, section.id);
+                            return <li key={section.id} style={{fontWeight: comp.isSelected(section) ? 'bold' : 'normal'}} >
+                                <a section={section.id} onClick={boundClicker}>
+                                    {[section.label, section.hasChanges ? <b>&nbsp;*</b> : '']}
+                                </a>
                             </li>;
                         })
                     }
                 </ul>
             </div>
-        </div>
+        );
     }
 });
 
@@ -44,4 +47,5 @@ export const NavigationMenuContainer = connect(
      },
      */
     state => state.get('navigation', Map()).toJS()
+
 )(NavigationMenu);

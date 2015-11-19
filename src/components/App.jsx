@@ -6,13 +6,15 @@ export default React.createClass({
 
     //NOT using PureRenderMixin here, for now - route changes may not fire:
     //https://github.com/rackt/react-router/issues/470
-
+    
     render: function() {
-        return <div>
-            <NavigationMenuContainer />
-            <div className="main">
-                {this.props.children}
+        return (
+            <div>
+                <NavigationMenuContainer />
+                <div className="main">
+                    {this.props.children}
+                </div>
             </div>
-        </div>
+        );
     }
 });
