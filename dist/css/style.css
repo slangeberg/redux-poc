@@ -4,6 +4,22 @@ body {
   color: white;
 }
 
+
+.navigationMenu {
+  padding: 5px;
+
+  text-align: center;
+
+  background-color: #B71C1C;
+  float: left;
+  width: 25%;
+}
+
+.main {
+  width: 75%;
+  float: right;
+}
+
 /* Voting Screen */
 
 .voting {
@@ -122,17 +138,3 @@ body {
   text-align: center;
 }
 
-/* Connection State */
-
-.connectionState {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-
-  padding: 5px;
-
-  text-align: center;
-
-  background-color: #B71C1C;
-}

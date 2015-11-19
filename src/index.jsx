@@ -17,6 +17,9 @@ import {ResultsContainer} from './components/Results';
 
 ////////////////
 
+//require('./style.css');
+
+////////////////
 
 const createStoreWithMiddleware = applyMiddleware(
     thunk

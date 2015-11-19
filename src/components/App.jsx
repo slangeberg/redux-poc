@@ -10,7 +10,9 @@ export default React.createClass({
     render: function() {
         return <div>
             <NavigationMenuContainer />
-            {this.props.children}
+            <div className="main">
+                {this.props.children}
+            </div>
         </div>
     }
 });
