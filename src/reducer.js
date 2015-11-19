@@ -57,6 +57,7 @@ function init() {
 
     return state;
 }
+
 function setConnectionState(state, connectionState, connected) {
     console.log('reducer.setConnectionState(connectionState: ', connectionState, ', connected: ', connected);
     return state.set('connection', Map({

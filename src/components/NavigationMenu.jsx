@@ -23,7 +23,7 @@ export const NavigationMenu = React.createClass({
                         this.props.sections.map(function(section) {
                             return <li key={section.id}
                                        style={{fontWeight: comp.isSelected(section) ? 'bold' : 'normal'}}>
-                                {section.label}
+                                {[section.label, section.hasChanges ? <b>&nbsp;*</b> : '']}
                             </li>;
                         })
                     }
@@ -36,11 +36,11 @@ export const NavigationMenu = React.createClass({
 export const NavigationMenuContainer = connect(
     /*
      "navigation": {
-     "selectedSection": "travelerDetails",
-     "sections": [
-     {"id": "travelerDetails", "label": "Traveler Details", hasChanges: false},
-     {"id": "payment", "label": "Payment", hasChanges: false}
-     ]
+         "selectedSection": "travelerDetails",
+         "sections": [
+             {"id": "travelerDetails", "label": "Traveler Details", hasChanges: false},
+             {"id": "payment", "label": "Payment", hasChanges: false}
+         ]
      },
      */
     state => state.get('navigation', Map()).toJS()
