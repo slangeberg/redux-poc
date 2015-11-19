@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import io from 'socket.io-client';
 import reducer from './reducer';
-import {setClientId, setState, setConnectionState, fetchPostsIfNeeded} from './action_creators';
+import {init} from './action_creators';
 import getClientId from './client_id';
 
 import App from './components/App';
@@ -23,7 +23,7 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 const store = createStoreWithMiddleware(reducer);
 
-store.dispatch(fetchPostsIfNeeded('hi!'));
+store.dispatch(init()); //fetchPostsIfNeeded('hi!'));
 
 
 ////////////

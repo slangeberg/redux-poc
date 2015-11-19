@@ -1,0 +1,19 @@
+{
+	data: {
+		creditCards: {
+			data: { 
+				cards: [
+					{
+						vendor: "Visa",
+						description: "My personal card",
+						cardNumber: "xxxx-xxxx-xxxx-1121"
+						preferred: [
+							"hotel", 
+							"rail"
+						]
+					}
+				]		
+			}
+		}
+	}
+}

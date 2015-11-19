@@ -1,9 +1,18 @@
 import fetch from 'isomorphic-fetch'
 
+export const INIT = 'INIT';
 export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 //export const SELECT_REDDIT = 'SELECT_REDDIT'
 //export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT'
+
+const dataDir = './data';
+
+export function init() {
+    return {
+        type: INIT
+    }
+}
 
 export function setClientId(clientId) {
   return {
@@ -74,7 +83,7 @@ function fetchPosts(reddit) {
 
         dispatch(requestPosts(reddit))
 
-        return fetch('./entries.json') //`http://www.reddit.com/r/${reddit}.json`)
+        return fetch(dataDir + '/entries.json') //`http://www.reddit.com/r/${reddit}.json`)
             .then(response => response.json())
             .then(json => dispatch(receivePosts(reddit, json)))
     }

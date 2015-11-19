@@ -1,9 +1,60 @@
-import {List, Map} from 'immutable';
+import {fromJS, List, Map} from 'immutable';
 import {
+    INIT,
    // SELECT_REDDIT, INVALIDATE_REDDIT,
     REQUEST_POSTS, RECEIVE_POSTS
 } from './action_creators';
 
+function init() {
+    console.log('reducer.init()');
+    var state = fromJS(
+        {
+            "selectedSection": "travelerDetails",
+            "sections": [
+                { "id": "travelerDetails", "label": "Traveler Details", hasChanges: false },
+                { "id": "payment", "label": "Payment", hasChanges: false }
+            ],
+            "data": {
+                travelerDetails: {
+                    travelerInformation: {
+                        "label": "Traveler Information",
+                        "hasChanges": false,
+                        isLoading: false,
+                        "hasLoaded": false,
+                        data: { }
+                    },
+                    additionalInformation: {
+                        "label": "Additional Information",
+                        "hasChanges": false,
+                        isLoading: false,
+                        "hasLoaded": false,
+                        data: {}
+                    },
+                    phoneNumber: {
+                        "label": "Phone Number",
+                        "hasChanges": false,
+                        isLoading: false,
+                        "hasLoaded": false,
+                        data: {}
+                    }
+                },
+                payment: {
+                    creditCards: {
+                        "label": "Credit Cards",
+                        "hasChanges": false,
+                        isLoading: false,
+                        "hasLoaded": false,
+                        data: {}
+                    }
+                }
+            }
+        }
+    );
+
+    console.log('reducer.init() - state: ', state.toJS());
+
+    return state;
+}
 function setConnectionState(state, connectionState, connected) {
     console.log('reducer.setConnectionState(connectionState: ', connectionState, ', connected: ', connected);
     return state.set('connection', Map({
@@ -95,6 +146,8 @@ export default function(state = Map(), action) {
     console.log('reducer(state: ', state.toJS(), ', action: ', action);
 
     switch (action.type) {
+        case INIT:
+            return init();
         case REQUEST_POSTS:
             return requestPosts(state, action.reddit);
         case 'SET_ENTRIES':
