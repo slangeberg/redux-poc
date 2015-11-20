@@ -11,7 +11,7 @@ import {init, goToSection} from './action_creators';
 
 import App from './components/App';
 import {TravelerDetailsContainer} from './components/TravelerDetails';
-import {ResultsContainer} from './components/Results';
+import {PaymentContainer} from './components/Payment';
 
 ////////////////
 
@@ -25,13 +25,14 @@ const createStoreWithMiddleware = applyMiddleware(
 const store = createStoreWithMiddleware(reducer);
 
 store.dispatch(init());
+
 store.dispatch(goToSection('travelerDetails'));
 
 ////////////
 
 const routes = <Route component={App}>
   <Route path="/" component={TravelerDetailsContainer} />
-  <Route path="/results" component={ResultsContainer} />
+  <Route path="/payment" component={PaymentContainer} />
 </Route>;
 
 ReactDOM.render(
