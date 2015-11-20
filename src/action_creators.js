@@ -1,68 +1,11 @@
 import fetch from 'isomorphic-fetch'
 
 export const INIT = 'INIT';
-export const GO_TO_SECTION = 'GO_TO_SECTION';
-
+export const SELECT_SECTION = 'SELECT_SECTION';
 export const REQUEST_SECTION = 'REQUEST_SECTION';
 export const RECEIVE_SECTION = 'RECEIVE_SECTION';
-//export const SELECT_REDDIT = 'SELECT_REDDIT'
-//export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT'
 
 const dataDir = 'data';
-
-export function init() {
-    return {
-        type: INIT
-    }
-}
-
-
-export function setClientId(clientId) {
-  return {
-    type: 'SET_CLIENT_ID',
-    clientId
-  };
-}
-
-export function setConnectionState(state, connected) {
-  return {
-    type: 'SET_CONNECTION_STATE',
-    state,
-    connected
-  };
-}
-
-export function setState(state) {
-  return {
-    type: 'SET_STATE',
-    state
-  };
-}
-
-export function vote(entry) {
-  console.log('action_creators.vote(', entry);
-  return {
-    meta: {remote: true},
-    type: 'VOTE',
-    entry
-  };
-}
-
-export function next() {
-  return {
-    meta: {remote: true},
-    type: 'NEXT'
-  };
-}
-
-export function restart() {
-  return {
-    type: 'RESTART'
-  };
-}
-
-
-// Start async stuff
 
 function requestSection(section) {
     return {
@@ -114,16 +57,29 @@ function shouldFetchSection(state, section) {
     return val;
 }
 
-function navigateToSection(section) {
-    console.log('actions.navigateToSection(', section);
+function selectSection(section) {
+    console.log('actions.selectSection(', section);
     return {
-        type: GO_TO_SECTION,
+        type: SELECT_SECTION,
         section
     }
 }
+
+////////
+
+export function init() {
+    return {
+        type: INIT
+    }
+}
+
 export function goToSection(section) {
     console.log('actions.goToSection(', section);
+
     return (dispatch, getState) => {
+
+        dispatch(selectSection(section));
+
         if (shouldFetchSection(getState(), section)) {
             return dispatch(fetchSection(section))
         }

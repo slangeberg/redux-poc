@@ -44,7 +44,7 @@ const TravelerDetailSection = React.createClass({
                 {
                     Object.keys(section.data).map(k => {
                         return (
-                            <p>{k}: <b>{section.data[k]}</b></p>
+                            <p key={k}>{k}: <b>{section.data[k]}</b></p>
                         )
                     })
                 }

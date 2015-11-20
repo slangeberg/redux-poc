@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 
 import reducer from './reducer';
-import {init} from './action_creators';
+import {init, goToSection} from './action_creators';
 
 import App from './components/App';
 import {TravelerDetailsContainer} from './components/TravelerDetails';
@@ -25,6 +25,7 @@ const createStoreWithMiddleware = applyMiddleware(
 const store = createStoreWithMiddleware(reducer);
 
 store.dispatch(init());
+store.dispatch(goToSection('travelerDetails'));
 
 ////////////
 
