@@ -37,7 +37,7 @@ const TravelerDetailSection = React.createClass({
     render: function() {
         console.log('TravelerDetailSection.render() - props.section: ', this.props.section);
         const section = this.props.section;
-        return (
+        return section.data ? (
             <div>
                 <hr/>
                 <h4>{section.label}</h4>
@@ -49,32 +49,9 @@ const TravelerDetailSection = React.createClass({
                     })
                 }
             </div>
-        );
+        ) : <div/>;
     }
 });
-/*
- travelerDetails: {
- "hasLoaded": false,
- "isLoading": false,
- "hasChanges": false,
-
- travelerInformation: {
- "label": "Traveler Information",
- data: { }
- },
- additionalInformation: {
- "label": "Additional Information",
- data: {}
- },
- phoneNumber: {
- "label": "Phone Number",
- "hasChanges": false,
- isLoading: false,
- "hasLoaded": false,
- data: {}
- }
- },
- */
 
 //function mapStateToProps(state) {
 //    return {
@@ -82,7 +59,6 @@ const TravelerDetailSection = React.createClass({
 //        hasVoted: state.getIn(['myVote', 'entry']),
 //        winner: state.get('winner'),
 //        isFetching: state.get('isFetching'),
-//        reddit: state.get('reddit')
 //    };
 //}
 
@@ -90,7 +66,6 @@ const TravelerDetailSection = React.createClass({
 export const TravelerDetailsContainer = connect(
     state => {
         var details = state.getIn(['data', 'travelerDetails']);
-        //debugger;
         var result = details.toJS();
         console.log('TravelerDetailsContainer.connect().map() - result: ', result);
         return result;
