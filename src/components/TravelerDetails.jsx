@@ -13,23 +13,43 @@ export const TravelerDetails = React.createClass({
 
     render: function() {
         console.log('TravelerDetails.render()');
+
         return (
             <div>
                 <div>
-                    hasLoaded: {this.props.hasLoaded.toString()}, isLoading: {this.props.isLoading}, hasChanges: {this.props.hasChanges}
+                    hasLoaded: {this.props.hasLoaded.toString()}, isLoading: {this.props.isLoading.toString()}, hasChanges: {this.props.hasChanges.toString()}
                 </div>
 
                 <div>
-                    {this.props.travelerInformation.label}: {this.props.travelerInformation.data.toString()}
+                    <TravelerDetailSection section={this.props['travelerInformation']} />
+                    <TravelerDetailSection section={this.props['additionalInformation']} />
+                    <TravelerDetailSection section={this.props['phoneNumber']} />
                 </div>
             </div>
         );
-        //<div>
-        //{this.props.winner ?
-        //<Winner ref="winner" winner={this.props.winner} /> :
-        //<Vote {...this.props} />}
+    }
+});
 
-        //</div>
+const TravelerDetailSection = React.createClass({
+
+    mixins: [PureRenderMixin],
+
+    render: function() {
+        console.log('TravelerDetailSection.render() - props.section: ', this.props.section);
+        const section = this.props.section;
+        return (
+            <div>
+                <hr/>
+                <h4>{section.label}</h4>
+                {
+                    Object.keys(section.data).map(k => {
+                        return (
+                            <p>{k}: <b>{section.data[k]}</b></p>
+                        )
+                    })
+                }
+            </div>
+        );
     }
 });
 /*
