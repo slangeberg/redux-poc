@@ -1,6 +1,7 @@
 {
 	"data": {
 		"travelerInformation": {
+		  	"label": "Traveler Information",
 			"data": {
 				"firstName": "Joe",
 				"lastName": "Bloe",
@@ -9,9 +10,11 @@
 			}
 		},
 		"additionalInformation": {
+		  	"label": "Additional Information",
 			"data": {}
 		},
 		"phoneNumber": {
+		  	"label": "Phone Number",
 			"data": {}
 		}
 	}

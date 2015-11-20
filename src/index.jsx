@@ -10,7 +10,7 @@ import reducer from './reducer';
 import {init} from './action_creators';
 
 import App from './components/App';
-import {VotingContainer} from './components/Voting';
+import {TravelerDetailsContainer} from './components/TravelerDetails';
 import {ResultsContainer} from './components/Results';
 
 ////////////////
@@ -29,7 +29,7 @@ store.dispatch(init());
 ////////////
 
 const routes = <Route component={App}>
-  <Route path="/" component={VotingContainer} />
+  <Route path="/" component={TravelerDetailsContainer} />
   <Route path="/results" component={ResultsContainer} />
 </Route>;
 

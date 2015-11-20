@@ -23,15 +23,13 @@ function init() {
                     "hasChanges": false,
 
                     travelerInformation: {
-                        "label": "Traveler Information",
+
                         data: { }
                     },
                     additionalInformation: {
-                        "label": "Additional Information",
                         data: {}
                     },
                     phoneNumber: {
-                        "label": "Phone Number",
                         "hasChanges": false,
                         isLoading: false,
                         "hasLoaded": false,
@@ -44,7 +42,6 @@ function init() {
                     "hasChanges": false,
 
                     creditCards: {
-                        "label": "Credit Cards",
                         data: {}
                     }
                 }
