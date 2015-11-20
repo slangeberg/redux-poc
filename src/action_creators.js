@@ -76,41 +76,10 @@ function receiveSection(section, json) {
     return {
         type: RECEIVE_SECTION,
         section: section,
-        data: json.data, //.data.children.map(child => child.data),
+        data: json.data,
         receivedAt: Date.now()
     }
 }
-//
-//function fetchPosts(reddit) {
-//    return dispatch => {
-//
-//        dispatch(requestPosts(reddit))
-//
-//        return fetch(dataDir + '/entries.json') //`http://www.reddit.com/r/${reddit}.json`)
-//            .then(response => response.json())
-//            .then(json => dispatch(receiveSection(reddit, json)))
-//    }
-//}
-//
-//function shouldFetchPosts(state, reddit) {
-//    const posts = state.postsByReddit[reddit]
-//    if (!posts) {
-//        return true
-//    }
-//    if (posts.isFetching) {
-//        return false
-//    }
-//    return posts.didInvalidate
-//}
-//
-//export function fetchPostsIfNeeded(reddit) {
-//    console.log('actions.fetchPostsIfNeeded(', reddit);
-//    return (dispatch, getState) => {
-//        if (shouldFetchPosts(getState(), reddit)) {
-//            return dispatch(fetchPosts(reddit))
-//        }
-//    }
-//}
 
 function fetchSection(section) {
     console.log('actions.fetchSection(', section);

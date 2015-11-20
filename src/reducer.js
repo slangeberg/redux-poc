@@ -104,6 +104,17 @@ function requestSection(state, section) {
     return result;
 }
 
+function receiveSection(state, section, data, receivedAt) {
+    data.hasLoaded = true;
+    data.isLoading = false;
+    data.lastUpdated = receivedAt;
+    var result = state.mergeIn(["data", section], data);
+
+    console.log('reducer.receiveSection(', arguments, ', result: ', result.toJS());
+
+    return result;
+}
+
 /////////////////
 
 //Copied from server proj
@@ -165,6 +176,8 @@ export default function(state = Map(), action) {
             return goToSection(state, action.section);
         case REQUEST_SECTION:
             return requestSection(state, action.section);
+        case RECEIVE_SECTION:
+            return receiveSection(state, action.section, action.data, action.receivedAt);
         case 'SET_ENTRIES':
             return setEntries(state, action.entries);
         case 'RESTART':
