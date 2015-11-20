@@ -15,6 +15,7 @@ body {
 }
 
 .main {
-  width: 75%;
+  width: 71%;
   float: right;
+  padding-top: 1em;
 }
