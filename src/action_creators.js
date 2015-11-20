@@ -3,12 +3,12 @@ import fetch from 'isomorphic-fetch'
 export const INIT = 'INIT';
 export const GO_TO_SECTION = 'GO_TO_SECTION';
 
-export const REQUEST_POSTS = 'REQUEST_POSTS';
-export const RECEIVE_POSTS = 'RECEIVE_POSTS';
+export const REQUEST_SECTION = 'REQUEST_SECTION';
+export const RECEIVE_SECTION = 'RECEIVE_SECTION';
 //export const SELECT_REDDIT = 'SELECT_REDDIT'
 //export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT'
 
-const dataDir = './data';
+const dataDir = 'data';
 
 export function init() {
     return {
@@ -16,13 +16,6 @@ export function init() {
     }
 }
 
-export function goToSection(section) {
-    console.log('actions.goToSection(', section);
-    return {
-        type: GO_TO_SECTION,
-        section
-    }
-}
 
 export function setClientId(clientId) {
   return {
@@ -71,50 +64,99 @@ export function restart() {
 
 // Start async stuff
 
-function requestPosts(reddit) {
+function requestSection(section) {
     return {
-        type: REQUEST_POSTS,
-        reddit
+        type: REQUEST_SECTION,
+        section
     }
 }
 
-function receivePosts(reddit, json) {
-    console.log('actions.receivePosts(', reddit, ', ', json);
+function receiveSection(section, json) {
+    console.log('actions.receiveSection(', section, ', ', json);
     return {
-        type: RECEIVE_POSTS,
-        reddit: reddit,
-        posts: json, //.data.children.map(child => child.data),
+        type: RECEIVE_SECTION,
+        section: section,
+        data: json.data, //.data.children.map(child => child.data),
         receivedAt: Date.now()
     }
 }
+//
+//function fetchPosts(reddit) {
+//    return dispatch => {
+//
+//        dispatch(requestPosts(reddit))
+//
+//        return fetch(dataDir + '/entries.json') //`http://www.reddit.com/r/${reddit}.json`)
+//            .then(response => response.json())
+//            .then(json => dispatch(receiveSection(reddit, json)))
+//    }
+//}
+//
+//function shouldFetchPosts(state, reddit) {
+//    const posts = state.postsByReddit[reddit]
+//    if (!posts) {
+//        return true
+//    }
+//    if (posts.isFetching) {
+//        return false
+//    }
+//    return posts.didInvalidate
+//}
+//
+//export function fetchPostsIfNeeded(reddit) {
+//    console.log('actions.fetchPostsIfNeeded(', reddit);
+//    return (dispatch, getState) => {
+//        if (shouldFetchPosts(getState(), reddit)) {
+//            return dispatch(fetchPosts(reddit))
+//        }
+//    }
+//}
 
-function fetchPosts(reddit) {
+function fetchSection(section) {
+    console.log('actions.fetchSection(', section);
+
     return dispatch => {
 
-        dispatch(requestPosts(reddit))
+        dispatch(requestSection(section));
 
-        return fetch(dataDir + '/entries.json') //`http://www.reddit.com/r/${reddit}.json`)
+//--> TODO/TMP: Come up with better system to track endpoints
+        var file = section == 'travelerDetails' ? 'traveler_details.json' : 'payment.json';
+        var url = `${location.origin}/${dataDir}/${file}`;
+
+        console.log('actions.fetchSection() - location: ', location);
+        console.log('actions.fetchSection() - url: ', url);
+
+        return fetch(url)
             .then(response => response.json())
-            .then(json => dispatch(receivePosts(reddit, json)))
+            .then(json => dispatch(receiveSection(section, json)))
+            .catch(ex => {
+                console.error(`actions.fetchSection(${section}) - Parsing Failed: `, ex, 'url: ', url);
+            });
     }
 }
 
-function shouldFetchPosts(state, reddit) {
-    const posts = state.postsByReddit[reddit]
-    if (!posts) {
-        return true
-    }
-    if (posts.isFetching) {
-        return false
-    }
-    return posts.didInvalidate
+function shouldFetchSection(state, section) {
+    console.log('actions.shouldFetchSection(', section);
+    const val = !state.getIn(["data", section, "hasLoaded"]);
+    //console.log('actions.shouldFetchSection() - sectionData', sectionData.toJS());
+
+    //const val = sectionData.get(hasLoaded;
+    console.log('actions.shouldFetchSection() - val: ', val);
+    return val;
 }
 
-export function fetchPostsIfNeeded(reddit) {
-    console.log('actions.fetchPostsIfNeeded(', reddit);
+function navigateToSection(section) {
+    console.log('actions.navigateToSection(', section);
+    return {
+        type: GO_TO_SECTION,
+        section
+    }
+}
+export function goToSection(section) {
+    console.log('actions.goToSection(', section);
     return (dispatch, getState) => {
-        if (shouldFetchPosts(getState(), reddit)) {
-            return dispatch(fetchPosts(reddit))
+        if (shouldFetchSection(getState(), section)) {
+            return dispatch(fetchSection(section))
         }
     }
 }

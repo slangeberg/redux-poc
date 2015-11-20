@@ -1,18 +1,18 @@
 {
-	data: {
-		travelerInformation: {
-			data: {
-				firstName: "Joe", 
-				lastName: "Bloe", 
-				gender: "M",
-				extId: 1234
+	"data": {
+		"travelerInformation": {
+			"data": {
+				"firstName": "Joe",
+				"lastName": "Bloe",
+				"gender": "M",
+				"extId": 1234
 			}
 		},
-		additionalInformation: {	
-			data: {}
+		"additionalInformation": {
+			"data": {}
 		},
-		phoneNumber: {
-			data: {}
+		"phoneNumber": {
+			"data": {}
 		}
 	}
 }

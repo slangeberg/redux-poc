@@ -4,12 +4,10 @@ import Router, {Route} from 'react-router';
 
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-
 import {Provider} from 'react-redux';
-import io from 'socket.io-client';
+
 import reducer from './reducer';
 import {init} from './action_creators';
-import getClientId from './client_id';
 
 import App from './components/App';
 import {VotingContainer} from './components/Voting';
@@ -26,8 +24,7 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 const store = createStoreWithMiddleware(reducer);
 
-store.dispatch(init()); //fetchPostsIfNeeded('hi!'));
-
+store.dispatch(init());
 
 ////////////
 

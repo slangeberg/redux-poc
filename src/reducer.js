@@ -2,7 +2,7 @@ import {fromJS, List, Map} from 'immutable';
 import {
     INIT, GO_TO_SECTION,
    // SELECT_REDDIT, INVALIDATE_REDDIT,
-    REQUEST_POSTS, RECEIVE_POSTS
+    REQUEST_SECTION, RECEIVE_SECTION
 } from './action_creators';
 
 function init() {
@@ -18,18 +18,16 @@ function init() {
             },
             "data": {
                 travelerDetails: {
+                    "hasLoaded": false,
+                    "isLoading": false,
+                    "hasChanges": false,
+
                     travelerInformation: {
                         "label": "Traveler Information",
-                        "hasChanges": false,
-                        isLoading: false,
-                        "hasLoaded": false,
                         data: { }
                     },
                     additionalInformation: {
                         "label": "Additional Information",
-                        "hasChanges": false,
-                        isLoading: false,
-                        "hasLoaded": false,
                         data: {}
                     },
                     phoneNumber: {
@@ -41,11 +39,12 @@ function init() {
                     }
                 },
                 payment: {
+                    "hasLoaded": false,
+                    "isLoading": false,
+                    "hasChanges": false,
+
                     creditCards: {
                         "label": "Credit Cards",
-                        "hasChanges": false,
-                        isLoading: false,
-                        "hasLoaded": false,
                         data: {}
                     }
                 }
@@ -97,10 +96,12 @@ function resetVote(state) {
     }
 }
 
-function requestPosts(state, reddit) {
-    console.log('reducer.requestPosts(', state.toJS(), reddit);
-    return state.set('isFetching', true)
-        .set('reddit', reddit);
+function requestSection(state, section) {
+    var result = state.setIn(["data", section, "isLoading"], true);
+
+    console.log(`reducer.requestSection(${section}) - updated section: `, result.getIn(["data", section]).toJS());
+
+    return result;
 }
 
 /////////////////
@@ -162,8 +163,8 @@ export default function(state = Map(), action) {
             return init();
         case GO_TO_SECTION:
             return goToSection(state, action.section);
-        case REQUEST_POSTS:
-            return requestPosts(state, action.reddit);
+        case REQUEST_SECTION:
+            return requestSection(state, action.section);
         case 'SET_ENTRIES':
             return setEntries(state, action.entries);
         case 'RESTART':
