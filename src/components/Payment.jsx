@@ -54,16 +54,16 @@ const PaymentSection = React.createClass({
     mixins: [PureRenderMixin],
 
     render: function() {
-        console.log('PaymentSection.render() - props.section: ', this.props.section);
-        const section = this.props.section;
-        return section.data ? (
+        console.log('PaymentSection.render() - props.creditCards: ', this.props.creditCards);
+        const creditCards = this.props.creditCards;
+        return creditCards.data ? (
             <div>
                 <hr/>
-                <h4>{section.label}</h4>
+                <h4>{creditCards.label}</h4>
                 {
-                    Object.keys(section.data).map(k => {
+                    Object.keys(creditCards.data).map(k => {
                         return (
-                            <p key={k}>{k}: <b>{section.data[k]}</b></p>
+                            <p key={k}>{k}: <b>{creditCards.data[k]}</b></p>
                         )
                     })
                 }

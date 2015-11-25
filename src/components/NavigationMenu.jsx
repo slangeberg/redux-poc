@@ -23,12 +23,15 @@ export const NavigationMenu = React.createClass({
         var comp = this;
         return (
             <div className="navigationMenu">
-                <ul>
+                <ul className="nav nav-pills nav-stacked">
                     {
                         this.props.sections.map(function(section) {
                             var boundClicker = comp.selectSection.bind(comp, section.id);
-                            return <li key={section.id} style={{fontWeight: comp.isSelected(section) ? 'bold' : 'normal'}} >
-                                <a section={section.id} onClick={boundClicker}>
+                            return <li key={section.id}
+                                       className={comp.isSelected(section) ? "active" : ""}>
+                                <a section={section.id}
+                                        onClick={boundClicker}
+                                        href="#">
                                     {[section.label, section.hasChanges ? <b>&nbsp;*</b> : '']}
                                 </a>
                             </li>;
