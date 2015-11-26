@@ -1,7 +1,8 @@
+import {Map} from 'immutable';
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
-import {Map} from 'immutable';
+import { /*Router, Route,*/ Link } from 'react-router'
 
 import * as actionCreators from '../action_creators';
 
@@ -27,13 +28,14 @@ export const NavigationMenu = React.createClass({
                     {
                         this.props.sections.map(function(section) {
                             var boundClicker = comp.selectSection.bind(comp, section.id);
-                            return <li key={section.id}
-                                       className={comp.isSelected(section) ? "active" : ""}>
-                                <a section={section.id}
-                                        onClick={boundClicker}
-                                        href="#">
-                                    {[section.label, section.hasChanges ? <b>&nbsp;*</b> : '']}
-                                </a>
+                            //<li key={user.id}><Link to={`/user/${user.id}`}>{user.name}</Link></li>
+                            // <a section={section.id}
+                            //onClick={boundClicker}
+                            //href="#">
+                            //{[section.label, section.hasChanges ? <b>&nbsp;*</b> : '']}
+                            //</a>
+                            return <li key={section.id} className={comp.isSelected(section) ? "active" : ""}>
+                                <Link to={`/${section.id}`}>{section.label}</Link>
                             </li>;
                         })
                     }
