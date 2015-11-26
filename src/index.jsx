@@ -26,7 +26,7 @@ const store = createStoreWithMiddleware(reducer);
 
 store.dispatch(init());
 
-store.dispatch(goToSection('travelerDetails'));
+//store.dispatch(goToSection('travelerDetails'));
 
 ////////////
 

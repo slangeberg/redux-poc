@@ -4,11 +4,18 @@ import {connect} from 'react-redux';
 
 import * as actionCreators from '../action_creators';
 
+const SECTION_NAME = 'travelerDetails';
+
 // this is the 'dumb' component
 export const TravelerDetails = React.createClass({
 
     //Immutable data ensures shallow change checks should pass - PureRenderMixin should be perf boost
     mixins: [PureRenderMixin],
+
+    componentWillReceiveProps: function(nextProps) {
+        //console.log('componentWillReceiveProps() - this.props: ', this.props, ', nextProps: ', nextProps);
+        this.props.goToSection(SECTION_NAME);
+    },
 
     render: function() {
         console.log('TravelerDetails.render()');
@@ -16,7 +23,9 @@ export const TravelerDetails = React.createClass({
         return (
             <div>
                 <div>
-                    hasLoaded: {this.props.hasLoaded.toString()}, isLoading: {this.props.isLoading.toString()}, hasChanges: {this.props.hasChanges.toString()}
+                    hasLoaded: {this.props.hasLoaded.toString()},
+                    isLoading: {this.props.isLoading.toString()},
+                    hasChanges: {this.props.hasChanges.toString()}
                 </div>
 
                 <div>
@@ -64,7 +73,7 @@ const TravelerDetailSection = React.createClass({
 // Container is the 'smart' / wired component
 export const TravelerDetailsContainer = connect(
     state => {
-        var details = state.getIn(['data', 'travelerDetails']);
+        var details = state.getIn(['data', SECTION_NAME]);
         var result = details.toJS();
         console.log('TravelerDetailsContainer.connect().map() - result: ', result);
         return result;

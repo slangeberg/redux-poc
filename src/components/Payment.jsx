@@ -4,11 +4,18 @@ import {connect} from 'react-redux';
 
 import * as actionCreators from '../action_creators';
 
+const SECTION_NAME = 'payment';
+
 // this is the 'dumb' component
 export const Payment = React.createClass({
 
     //Immutable data ensures shallow change checks should pass - PureRenderMixin should be perf boost
     mixins: [PureRenderMixin],
+
+    componentWillReceiveProps: function(nextProps) {
+        //console.log('componentWillReceiveProps() - this.props: ', this.props, ', nextProps: ', nextProps);
+        this.props.goToSection(SECTION_NAME);
+    },
 
     render: function() {
         console.log('Payment.render()');
@@ -36,34 +43,48 @@ export const Payment = React.createClass({
         return (
             <div>
                 <div>
-                    hasLoaded: {this.props.hasLoaded.toString()}, isLoading: {this.props.isLoading.toString()}, hasChanges: {this.props.hasChanges.toString()}
+                    hasLoaded: {this.props.hasLoaded.toString()},
+                    isLoading: {this.props.isLoading.toString()},
+                    hasChanges: {this.props.hasChanges.toString()}
                 </div>
-
                 <div>
-                    <PaymentSection section={this.props['travelerInformation']} />
-                    <PaymentSection section={this.props['additionalInformation']} />
-                    <PaymentSection section={this.props['phoneNumber']} />
+                    <CreditCards section={this.props.creditCards} />
                 </div>
             </div>
         );
     }
 });
 
-const PaymentSection = React.createClass({
+const CreditCards = React.createClass({
 
     mixins: [PureRenderMixin],
 
     render: function() {
-        console.log('PaymentSection.render() - props.creditCards: ', this.props.creditCards);
-        const creditCards = this.props.creditCards;
-        return creditCards.data ? (
+        const section = this.props.section;
+        console.log('CreditCards.render() - section: ', section);
+
+/*
+ {
+ "vendor": "Master Card",
+ "description": "My business card",
+ "cardNumber": "xxxx-xxxx-xxxx-3211",
+ "preferred": [
+ "car"
+ ]
+ }
+ */
+
+        const cards = section.data;
+
+        //console.log('render() - keys: ', keys, ', vals: ', vals);
+        return cards ? (
             <div>
                 <hr/>
-                <h4>{creditCards.label}</h4>
+                <h4>{section.label}</h4>
                 {
-                    Object.keys(creditCards.data).map(k => {
+                    cards.map(card => {
                         return (
-                            <p key={k}>{k}: <b>{creditCards.data[k]}</b></p>
+                            <p key={card.cardNumber}>#: {card.cardNumber} <b>{card.vendor}</b></p>
                         )
                     })
                 }
@@ -84,7 +105,7 @@ const PaymentSection = React.createClass({
 // Container is the 'smart' / wired component
 export const PaymentContainer = connect(
         state => {
-        var payment = state.getIn(['data', 'payment']);
+        var payment = state.getIn(['data', SECTION_NAME]);
         var result = payment.toJS();
         console.log('PaymentContainer.connect().map() - result: ', result);
         return result;

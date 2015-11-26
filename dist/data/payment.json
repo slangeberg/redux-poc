@@ -1,19 +1,25 @@
 {
-	"data": {
-	  "creditCards": {
-		"data": {
-		  "cards": [
-			{
-			  "vendor": "Visa",
-			  "description": "My personal card",
-			  "cardNumber": "xxxx-xxxx-xxxx-1121",
-			  "preferred": [
-				"hotel",
-				"rail"
-			  ]
-			}
-		  ]
-		}
-	  }
-	}
+    "data": {
+        "creditCards": {
+            "label": "Credit Cards",
+            "data": [
+                {
+                    "vendor": "Visa",
+                    "description": "My personal card",
+                    "cardNumber": "xxxx-xxxx-xxxx-1121",
+                    "preferred": [
+                        "hotel",
+                        "rail"
+                    ]
+                }, {
+                    "vendor": "Master Card",
+                    "description": "My business card",
+                    "cardNumber": "xxxx-xxxx-xxxx-3211",
+                    "preferred": [
+                        "car"
+                    ]
+                }
+            ]
+        }
+    }
 }
