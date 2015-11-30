@@ -15,7 +15,6 @@ var {zeroTime} = require('./utils')
 
 var TODAY = zeroTime(new Date())
 
-var mapStateToProps = state => state
 
 var form = reduxForm({
   form: 'addTravel',
@@ -143,5 +142,7 @@ var AddTravel = React.createClass({
     </div>
   }
 })
+
+const mapStateToProps = state => state.toJS();
 
 module.exports = connect(mapStateToProps)(form(AddTravel))
