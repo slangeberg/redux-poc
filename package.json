@@ -4,18 +4,21 @@
   "description": "Taking a look at application architecture leveraging the [Redux framework](https://github.com/rackt/redux).",
   "main": "index.js",
   "dependencies": {
-    "classnames": "^2.2.0",
+    "bootstrap": "3.3.5",
+    "classnames": "^2.2.1",
     "history": "^1.13.1",
     "immutable": "^3.7.5",
     "isomorphic-fetch": "^2.2.0",
-    "react": "^0.14.2",
+    "react": "^0.14.3",
     "react-addons-pure-render-mixin": "^0.14.2",
+    "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.2",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0",
+    "react-widgets": "^3.1.0",
     "redux": "^3.0.4",
-    "redux-thunk": "^1.0.0",
-    "uuid": "^2.0.1"
+    "redux-form": "2.0.0",
+    "redux-thunk": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.1.21",

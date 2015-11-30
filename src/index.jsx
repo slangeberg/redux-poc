@@ -13,6 +13,9 @@ import {AppContainer} from './components/App';
 import {TravelerDetailsContainer} from './components/TravelerDetails';
 import {PaymentContainer} from './components/Payment';
 
+import AddTravel from './components/AddTravel'; //= require('./AddTravel')
+
+
 ////////////////
 
 //require('./style.css');
@@ -33,6 +36,7 @@ store.dispatch(init());
 const routes = <Route path="/" component={AppContainer}>
   <Route path="/travelerDetails" component={TravelerDetailsContainer} />
   <Route path="/payment" component={PaymentContainer} />
+  <Route path="/travel" component={AddTravel} />
 </Route>;
 
 ReactDOM.render(

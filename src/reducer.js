@@ -11,7 +11,8 @@ function init() {
                 "selectedSection": null,
                 "sections": [
                     {"id": "travelerDetails", "label": "Traveler Details", hasChanges: false},
-                    {"id": "payment", "label": "Payment", hasChanges: false}
+                    {"id": "payment", "label": "Payment", hasChanges: false},
+                    {"id": "travel", "label": "Travel", hasChanges: false}
                 ]
             },
             "data": {
