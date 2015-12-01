@@ -104,7 +104,9 @@ const CreditCards = React.createClass({
 
 // Container is the 'smart' / wired component
 export const PaymentContainer = connect(
-        state => {
+    state => {
+        state = state.app; //nested, after combined reducers
+
         var payment = state.getIn(['data', SECTION_NAME]);
         var result = payment.toJS();
         console.log('PaymentContainer.connect().map() - result: ', result);

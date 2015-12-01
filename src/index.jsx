@@ -23,30 +23,33 @@ import AddTravel from './components/AddTravel'; //= require('./AddTravel')
 
 ////////////////
 
-const tempReducer = (state = {hi: 'there'}, action) => {
+//const tempReducer = (state = {hi: 'there'}, action) => {
+//
+//    console.log('index.tempReducer(state: ', state, ', action: ', action);
+//
+//    switch (action.type) {
+//        default:
+//            return state;
+//    }
+//}
 
-    console.log('index.tempReducer(state: ', state, ', action: ', action);
-
-    switch (action.type) {
-        default:
-            return state;
-    }
-}
-
-const reducers = combineReducers({
-    appReducer,
-    tempReducer
-//    form: formReducer
+//Ah, bloody keys become keys on new state object, seen in connect()!
+const reducer = combineReducers({
+    app: appReducer,
+    //temp: tempReducer,
+    form: formReducer
 });
 
-//const createStoreWithMiddleware = applyMiddleware(
-//    thunk
-//)(createStore);
-//const store = createStoreWithMiddleware(reducers);
-
-const store = createStore(reducers);
+const createStoreWithMiddleware = applyMiddleware(
+    thunk
+)(createStore);
+const store = createStoreWithMiddleware(reducer);
 
 console.log('index.jsx - store.getState(): ', store.getState());
+
+store.subscribe(() =>
+    console.log('index - store.subscribe() - store.getState().app: ', store.getState().app)
+)
 
 ////////////
 

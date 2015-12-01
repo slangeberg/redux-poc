@@ -52,7 +52,9 @@ export const NavigationMenuContainer = connect(
      },
      */
     state => {
-        var navigation = state && state.get ? state.get('navigation') : Map();
+        state = state.app; //nested after combined reducers
+
+        var navigation = state.get('navigation');
         var result = navigation.toJS();
         console.log('NavigationMenuContainer.connect().map() - navigation: ', result);
         return result;

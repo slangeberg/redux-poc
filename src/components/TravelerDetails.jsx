@@ -73,6 +73,8 @@ const TravelerDetailSection = React.createClass({
 // Container is the 'smart' / wired component
 export const TravelerDetailsContainer = connect(
     state => {
+        state = state.app; //nested after combined reducers
+
         var details = state.getIn(['data', SECTION_NAME]);
         var result = details.toJS();
         console.log('TravelerDetailsContainer.connect().map() - result: ', result);

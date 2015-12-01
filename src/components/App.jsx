@@ -27,9 +27,9 @@ export const App = React.createClass({
 
 export const AppContainer = connect(
     state => {
-        console.log('AppContainer.connect().map() - state: ', state);
-        //var navigation = state.get('navigation');
-        var result = state && state.toJS ? state.toJS() : {navigation: {selectedSection: null}};
+        state = state.app; // nested, after combining reducers!
+
+        var result = state.toJS();
         console.log('AppContainer.connect().map() - result: ', result);
         return result;
     }

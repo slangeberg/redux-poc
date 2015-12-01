@@ -48,6 +48,8 @@ function fetchSection(section) {
 }
 
 function shouldFetchSection(state, section) {
+    state = state.app; //nested, after combined reducers
+
     console.log('actions.shouldFetchSection(', section);
     const val = !state.getIn(["data", section, "hasLoaded"]);
     //console.log('actions.shouldFetchSection() - sectionData', sectionData.toJS());
