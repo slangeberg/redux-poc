@@ -28,6 +28,11 @@ store.dispatch(init());
 
 //store.dispatch(goToSection('travelerDetails'));
 
+store.subscribe(() =>
+    console.log('index.store.subscribe() - state: ', store.getState().toJS())
+);
+
+
 ////////////
 
 const routes = <Route path="/" component={AppContainer}>
