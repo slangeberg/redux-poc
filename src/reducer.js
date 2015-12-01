@@ -3,53 +3,53 @@ import {
     INIT, SELECT_SECTION, REQUEST_SECTION, RECEIVE_SECTION
 } from './action_creators';
 
-function init() {
-    console.log('reducer.init()');
-    var state = fromJS(
-        {
-            "navigation": {
-                "selectedSection": null,
-                "sections": [
-                    {"id": "travelerDetails", "label": "Traveler Details", hasChanges: false},
-                    {"id": "payment", "label": "Payment", hasChanges: false}
-                ]
+const initState = fromJS({
+    "navigation": {
+        "selectedSection": null,
+        "sections": [
+            {"id": "travelerDetails", "label": "Traveler Details", hasChanges: false},
+            {"id": "payment", "label": "Payment", hasChanges: false}
+        ]
+    },
+    "data": {
+        travelerDetails: {
+            "hasLoaded": false,
+            "isLoading": false,
+            "hasChanges": false,
+
+            travelerInformation: {
+                data: null
             },
-            "data": {
-                travelerDetails: {
-                    "hasLoaded": false,
-                    "isLoading": false,
-                    "hasChanges": false,
+            additionalInformation: {
+                data: null
+            },
+            phoneNumber: {
+                data: null
+            }
+        },
+        payment: {
+            "hasLoaded": false,
+            "isLoading": false,
+            "hasChanges": false,
 
-                    travelerInformation: {
-                        data: null
-                    },
-                    additionalInformation: {
-                        data: null
-                    },
-                    phoneNumber: {
-                        data: null
-                    }
-                },
-                payment: {
-                    "hasLoaded": false,
-                    "isLoading": false,
-                    "hasChanges": false,
-
-                    creditCards: {
-                        data: null
-                    }
-                }
+            creditCards: {
+                data: null
             }
         }
-    );
+    }
+});
 
-    //console.log('reducer.init() - state: ', state.toJS());
-
-    return state;
+function init() {
+   return initState;
 }
 
-
 function selectSection(state, section) {
+    console.log('reducer.selectSection(section: ', section);
+
+    if (!section){
+        return state;
+    }
+
     var updated = state.setIn(["navigation", "selectedSection"], section);
     var hasChanged = updated !== state;
 
@@ -59,6 +59,12 @@ function selectSection(state, section) {
 }
 
 function requestSection(state, section) {
+    console.log(`reducer.requestSection(section: ${section})`);
+
+    if (!section) {
+        return state;
+    }
+
     var result = state.setIn(["data", section, "isLoading"], true);
 
     console.log(`reducer.requestSection(${section}) - updated section: `, result.getIn(["data", section]).toJS());
@@ -78,19 +84,29 @@ function receiveSection(state, section, data, receivedAt) {
 }
 
 
-export default function(state = Map(), action) {
+export default function(state = initState, action) {
 
-    console.log('reducer(state: ', state.toJS(), ', action: ', action);
+    console.log('reducer.default(state: ', state.toJS(), ', action: ', action);
+
+    let result = state;
 
     switch (action.type) {
         case INIT:
-            return init();
+            result = init();
+            break;
         case SELECT_SECTION:
-            return selectSection(state, action.section);
+            result = selectSection(state, action.section);
+            break;
         case REQUEST_SECTION:
-            return requestSection(state, action.section);
+            result = requestSection(state, action.section);
+            break;
         case RECEIVE_SECTION:
-            return receiveSection(state, action.section, action.data, action.receivedAt);
+            result = receiveSection(state, action.section, action.data, action.receivedAt);
+            break;
+        //default:
+        //    result = state;
     }
-    return state;
+    console.log('reducer.default() - result: ', result); //state: ', state.toJS(), ', action: ', action);
+
+    return result;
 }

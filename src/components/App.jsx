@@ -27,7 +27,7 @@ export const App = React.createClass({
 
 export const AppContainer = connect(
     state => {
-        //var navigation = state.get('navigation');
+        console.log('AppContainer.connect().map() - state: ', state);
         var result = state.toJS();
         console.log('AppContainer.connect().map() - result: ', result);
         return result;
