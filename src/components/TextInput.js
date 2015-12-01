@@ -8,8 +8,10 @@ var TextInput = React.createClass({
     field: PropTypes.object.isRequired
   },
   shouldComponentUpdate: FormField.shouldFormFieldUpdate,
+
   render() {
-    var {field, help, label, onChange, /*...*/inputProps} = this.props
+    const inputProps = {}; //TBD
+    var {field, help, label, onChange/*, ...inputProps*/} = this.props
     return <FormField field={field} help={help} inputProps={inputProps} label={label}>
       <input
         {...inputProps}

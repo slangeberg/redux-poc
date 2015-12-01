@@ -84,8 +84,12 @@ var FormField = React.createClass({
     }
   },
   render() {
-    var {field, help, inputClass, inputProps, label, loading} = this.props
-    var error = field.touched && field.error
+    var {field, help, inputClass, inputProps, label, loading} = this.props;
+
+    console.log('FormField.render() - props: ', this.props);
+    console.log('FormField.render() - inputProps: ', inputProps);
+
+    var error = field.touched && field.error;
     return <Col sm={6}>
       <Row className={classNames('form-group', {'has-error': error})}>
         <Col sm={4} className="control-label">

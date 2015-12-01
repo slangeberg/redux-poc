@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Router, {Route} from 'react-router';
 
-import {createStore, applyMiddleware} from 'redux';
+import {combineReducers, createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 
-import reducer from './reducer';
+import appReducer from './reducer';
+import {reducer as formReducer} from 'redux-form';
 import {init, goToSection} from './action_creators';
 
 import {AppContainer} from './components/App';
@@ -22,22 +23,40 @@ import AddTravel from './components/AddTravel'; //= require('./AddTravel')
 
 ////////////////
 
-const createStoreWithMiddleware = applyMiddleware(
-    thunk
-)(createStore);
-const store = createStoreWithMiddleware(reducer);
+const tempReducer = (state = {hi: 'there'}, action) => {
 
-store.dispatch(init());
+    console.log('index.tempReducer(state: ', state, ', action: ', action);
 
-//store.dispatch(goToSection('travelerDetails'));
+    switch (action.type) {
+        default:
+            return state;
+    }
+}
+
+const reducers = combineReducers({
+    appReducer,
+    tempReducer
+//    form: formReducer
+});
+
+//const createStoreWithMiddleware = applyMiddleware(
+//    thunk
+//)(createStore);
+//const store = createStoreWithMiddleware(reducers);
+
+const store = createStore(reducers);
+
+console.log('index.jsx - store.getState(): ', store.getState());
 
 ////////////
 
-const routes = <Route path="/" component={AppContainer}>
-  <Route path="/travelerDetails" component={TravelerDetailsContainer} />
-  <Route path="/payment" component={PaymentContainer} />
-  <Route path="/travel" component={AddTravel} />
-</Route>;
+const routes = (
+    <Route path="/" component={AppContainer}>
+      <Route path="/travelerDetails" component={TravelerDetailsContainer} />
+      <Route path="/payment" component={PaymentContainer} />
+      <Route path="/travel" component={AddTravel} />
+    </Route>
+);
 
 ReactDOM.render(
     <Provider store={store}>

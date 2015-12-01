@@ -14,9 +14,12 @@ var LoadingButton = React.createClass({
     loadingLabel: React.PropTypes.string
   },
   render() {
-    var {icon, label, loading, loadingLabel, /*...*/props} = this.props
+    var {icon, label, loading, loadingLabel, /*...*/props} = this.props;
+
+    console.log('LoadingButton.render() - props: ', this.props);
+
     if (!loadingLabel) {
-      loadingLabel = `${label}ing`
+      loadingLabel = `${label}ing`;
     }
     return <Button disabled={loading} {...props}>
       {loading

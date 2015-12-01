@@ -22,18 +22,12 @@ export const NavigationMenu = React.createClass({
 
     render: function () {
         var comp = this;
-        return (
+        return this.props.sections ? (
             <div className="navigationMenu">
                 <ul className="nav nav-pills nav-stacked">
                     {
                         this.props.sections.map(function(section) {
                             var boundClicker = comp.selectSection.bind(comp, section.id);
-                            //<li key={user.id}><Link to={`/user/${user.id}`}>{user.name}</Link></li>
-                            // <a section={section.id}
-                            //onClick={boundClicker}
-                            //href="#">
-                            //{[section.label, section.hasChanges ? <b>&nbsp;*</b> : '']}
-                            //</a>
                             return <li key={section.id} className={comp.isSelected(section) ? "active" : ""}>
                                 <Link to={`/${section.id}`}>{section.label}</Link>
                             </li>;
@@ -41,6 +35,8 @@ export const NavigationMenu = React.createClass({
                     }
                 </ul>
             </div>
+        ) : (
+            <div>No Sections Provided</div>
         );
     }
 });
@@ -56,7 +52,7 @@ export const NavigationMenuContainer = connect(
      },
      */
     state => {
-        var navigation = state.get('navigation');
+        var navigation = state && state.get ? state.get('navigation') : Map();
         var result = navigation.toJS();
         console.log('NavigationMenuContainer.connect().map() - navigation: ', result);
         return result;

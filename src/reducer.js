@@ -3,52 +3,47 @@ import {
     INIT, SELECT_SECTION, REQUEST_SECTION, RECEIVE_SECTION
 } from './action_creators';
 
-function init() {
-    console.log('reducer.init()');
-    var state = fromJS(
-        {
-            "navigation": {
-                "selectedSection": null,
-                "sections": [
-                    {"id": "travelerDetails", "label": "Traveler Details", hasChanges: false},
-                    {"id": "payment", "label": "Payment", hasChanges: false},
-                    {"id": "travel", "label": "Travel", hasChanges: false}
-                ]
+const initState = fromJS({
+    "navigation": {
+        "selectedSection": null,
+        "sections": [
+            {"id": "travelerDetails", "label": "Traveler Details", hasChanges: false},
+            {"id": "payment", "label": "Payment", hasChanges: false},
+            {"id": "travel", "label": "Travel", hasChanges: false}
+        ]
+    },
+    "data": {
+        travelerDetails: {
+            "hasLoaded": false,
+            "isLoading": false,
+            "hasChanges": false,
+
+            travelerInformation: {
+                data: null
             },
-            "data": {
-                travelerDetails: {
-                    "hasLoaded": false,
-                    "isLoading": false,
-                    "hasChanges": false,
+            additionalInformation: {
+                data: null
+            },
+            phoneNumber: {
+                data: null
+            }
+        },
+        payment: {
+            "hasLoaded": false,
+            "isLoading": false,
+            "hasChanges": false,
 
-                    travelerInformation: {
-                        data: null
-                    },
-                    additionalInformation: {
-                        data: null
-                    },
-                    phoneNumber: {
-                        data: null
-                    }
-                },
-                payment: {
-                    "hasLoaded": false,
-                    "isLoading": false,
-                    "hasChanges": false,
-
-                    creditCards: {
-                        data: null
-                    }
-                }
+            creditCards: {
+                data: null
             }
         }
-    );
+    }
+});
 
-    //console.log('reducer.init() - state: ', state.toJS());
-
-    return state;
+function init() {
+    console.log('reducer.init()');
+    return initState;
 }
-
 
 function selectSection(state, section) {
     var updated = state.setIn(["navigation", "selectedSection"], section);
@@ -78,10 +73,11 @@ function receiveSection(state, section, data, receivedAt) {
     return result;
 }
 
+/////////
 
-export default function(state = Map(), action) {
+export default function(state = initState, action) {
 
-    console.log('reducer(state: ', state.toJS(), ', action: ', action);
+    console.log('reducer.default(state: ', state.toJS(), ', action: ', action);
 
     switch (action.type) {
         case INIT:
@@ -92,6 +88,7 @@ export default function(state = Map(), action) {
             return requestSection(state, action.section);
         case RECEIVE_SECTION:
             return receiveSection(state, action.section, action.data, action.receivedAt);
+        default:
+            return state;
     }
-    return state;
 }
