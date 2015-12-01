@@ -21,6 +21,13 @@ import AddTravel from './components/AddTravel'; //= require('./AddTravel')
 
 //require('./style.css');
 
+//require('expose?$!expose?jQuery!jquery');
+//require("bootstrap-webpack");
+
+//import * from 'bootstrap/css/bootstrap.css';
+
+
+
 ////////////////
 
 //const tempReducer = (state = {hi: 'there'}, action) => {
