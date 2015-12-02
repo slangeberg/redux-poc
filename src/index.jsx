@@ -40,7 +40,7 @@ const store = createStoreWithMiddleware(reducer);
 console.log('index.jsx - store.getState(): ', store.getState());
 
 store.subscribe(() =>
-    console.log('index - store.subscribe() - store.getState().app: ', store.getState().app)
+    console.log('index - store.subscribe() - store.getState().form: ', store.getState().form, ', store.getState().app: ', store.getState().app.toJS())
 )
 
 ////////////
