@@ -2,7 +2,10 @@ import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 
+//import SimpleForm, {fields} from './SimpleForm'
+import ContactForm from './ContactForm';
 import * as actionCreators from '../action_creators';
+
 
 const SECTION_NAME = 'payment';
 
@@ -88,6 +91,7 @@ const CreditCards = React.createClass({
                         )
                     })
                 }
+                <ContactForm />
             </div>
         ) : <div/>;
     }

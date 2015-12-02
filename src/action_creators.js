@@ -32,11 +32,10 @@ function fetchSection(section) {
         dispatch(requestSection(section));
 
 //--> TODO/TMP: Come up with better system to track endpoints
-        var file = section == 'travelerDetails' ? 'traveler_details.json' : 'payment.json';
-        var url = `${location.origin}/${dataDir}/${file}`;
+        let file = `${section}.json`;
+        let url = `${location.origin}/${dataDir}/${file}`;
 
-        console.log('actions.fetchSection() - location: ', location);
-        console.log('actions.fetchSection() - url: ', url);
+        console.log('actions.fetchSection() - file: ', file, ', url: ', url);
 
         return fetch(url)
             .then(response => response.json())

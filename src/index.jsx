@@ -14,8 +14,6 @@ import {AppContainer} from './components/App';
 import {TravelerDetailsContainer} from './components/TravelerDetails';
 import {PaymentContainer} from './components/Payment';
 
-import AddTravel from './components/AddTravel';
-
 ////////////////
 
 //require('./style.css');
@@ -51,7 +49,6 @@ const routes = (
     <Route path="/" component={AppContainer}>
       <Route path="/travelerDetails" component={TravelerDetailsContainer} />
       <Route path="/payment" component={PaymentContainer} />
-      <Route path="/travel" component={AddTravel} />
     </Route>
 );
 
