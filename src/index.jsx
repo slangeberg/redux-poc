@@ -14,8 +14,7 @@ import {AppContainer} from './components/App';
 import {TravelerDetailsContainer} from './components/TravelerDetails';
 import {PaymentContainer} from './components/Payment';
 
-import AddTravel from './components/AddTravel'; //= require('./AddTravel')
-
+import AddTravel from './components/AddTravel';
 
 ////////////////
 
@@ -27,23 +26,11 @@ import AddTravel from './components/AddTravel'; //= require('./AddTravel')
 //import * from 'bootstrap/css/bootstrap.css';
 
 
-
 ////////////////
-
-//const tempReducer = (state = {hi: 'there'}, action) => {
-//
-//    console.log('index.tempReducer(state: ', state, ', action: ', action);
-//
-//    switch (action.type) {
-//        default:
-//            return state;
-//    }
-//}
 
 //Ah, bloody keys become keys on new state object, seen in connect()!
 const reducer = combineReducers({
     app: appReducer,
-    //temp: tempReducer,
     form: formReducer
 });
 
