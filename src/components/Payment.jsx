@@ -91,7 +91,7 @@ const CreditCards = React.createClass({
                         )
                     })
                 }
-                <ContactForm />
+                <ContactForm handleSubmit={() => console.log('handleSubmit()')} />
             </div>
         ) : <div/>;
     }

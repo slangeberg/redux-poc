@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {reduxForm} from 'redux-form';
+import {connectReduxForm, reduxForm} from 'redux-form';
 
 class ContactForm extends Component {
     render() {
@@ -24,7 +24,7 @@ class ContactForm extends Component {
     }
 }
 
-ContactForm = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
+ContactForm = connectReduxForm({ // <----- THIS IS THE IMPORTANT PART!
     form: 'contact',                           // a unique name for this form
     fields: ['firstName', 'lastName', 'email'] // all the fields in your form
 })(ContactForm);
