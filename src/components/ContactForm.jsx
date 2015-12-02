@@ -3,9 +3,11 @@ import {connectReduxForm, reduxForm} from 'redux-form';
 
 class ContactForm extends Component {
     render() {
-        const {fields: {firstName, lastName, email}, handleSubmit} = this.props;
+        const {fields: {firstName, lastName, email}, card, handleSubmit} = this.props;
         return (
             <form onSubmit={handleSubmit}>
+                <p>----</p>
+                <p key={card.cardNumber}>#: {card.cardNumber} <b>{card.vendor}</b></p>
                 <div>
                     <label>First Name</label>
                     <input type="text" placeholder="First Name" {...firstName}/>
