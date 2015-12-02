@@ -1,8 +1,10 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import CreditCardForm from './CreditCardForm';
+
 import * as actionCreators from '../action_creators';
 
 
@@ -17,33 +19,10 @@ export const Payment = React.createClass({
     mixins: [PureRenderMixin],
 
     componentWillReceiveProps: function(nextProps) {
-        //console.log('componentWillReceiveProps() - this.props: ', this.props, ', nextProps: ', nextProps);
         this.props.goToSection(SECTION_NAME);
     },
 
     render: function() {
-        console.log('Payment.render()');
-/*
- {
- "data": {
- "creditCards": {
- "data": {
- "cards": [
- {
- "vendor": "Visa",
- "description": "My personal card",
- "cardNumber": "xxxx-xxxx-xxxx-1121",
- "preferred": [
- "hotel",
- "rail"
- ]
- }
- ]
- }
- }
- }
- }
- */
         return (
             <div>
                 <div>
@@ -52,7 +31,7 @@ export const Payment = React.createClass({
                     hasChanges: {this.props.hasChanges.toString()}
                 </div>
                 <div>
-                    <CreditCards section={this.props.creditCards} />
+                    <CreditCards section={this.props.creditCards} {...this.props} />
                 </div>
             </div>
         );
@@ -64,9 +43,33 @@ const CreditCards = React.createClass({
     mixins: [PureRenderMixin],
 
     render: function() {
-        const section = this.props.section;
-        console.log('CreditCards.render() - section: ', section);
+        const { section } = this.props;
 
+        console.log('CreditCards.render() - section: ', section, ', props: ', this.props, 'props.deleteCard: ', this.props.deleteCard);
+
+        const cards = section.data;
+
+        return cards ? (
+            <div>
+                <hr/>
+                <h4>{section.label}</h4>
+                {
+                    cards.map(card => {
+                        return (
+                            <CreditCard key={card.number} card={card} {...this.props} />
+                        )
+                    })
+                }
+            </div>
+        ) : <div/>;
+    }
+});
+
+const CreditCard = React.createClass({
+
+    mixins: [PureRenderMixin],
+
+    render: function() {
 /*
  {
  "vendor": "Master Card",
@@ -77,24 +80,22 @@ const CreditCards = React.createClass({
  ]
  }
  */
+        const card = this.props.card;
 
-        const cards = section.data;
-
-        //console.log('render() - keys: ', keys, ', vals: ', vals);
-        return cards ? (
+        return (
             <div>
-                <hr/>
-                <h4>{section.label}</h4>
                 {
-                    cards.map(card => {
-                        return (
-                            <p key={card.cardNumber}>#: {card.cardNumber} <b>{card.vendor}</b></p>
-                        )
-                    })
+                    card.isEditMode ? (
+                        <CreditCardForm card={card} handleSubmit={() => console.log('handleSubmit() - card: ', card)}/>
+                    ) : (
+                        <p>
+                            #: {card.cardNumber} <b>{card.vendor}</b>&nbsp;&nbsp;
+                            <button onClick={() => this.props.deleteCard(card.id)}>Del</button>
+                        </p>
+                    )
                 }
-                <CreditCardForm card={cards[0]} handleSubmit={() => console.log('handleSubmit()')} />
             </div>
-        ) : <div/>;
+        );
     }
 });
 

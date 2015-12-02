@@ -1,6 +1,10 @@
 import {fromJS, List, Map} from 'immutable';
 import {
-    INIT, SELECT_SECTION, REQUEST_SECTION, RECEIVE_SECTION
+    INIT, SELECT_SECTION, REQUEST_SECTION, RECEIVE_SECTION,
+
+    // Payment section
+    PAYMENT_DELETE_CARD
+
 } from './action_creators';
 
 const initState = fromJS({
@@ -72,6 +76,13 @@ function receiveSection(state, section, data, receivedAt) {
     return result;
 }
 
+/////// PAYMENT reducers - Would move to new file /////////
+
+function paymentDeleteCard(state, cardId){
+    console.log('reducer.paymentDeleteCard( ', cardId);
+    return state;
+}
+
 /////////
 
 export default function(state = initState, action) {
@@ -87,6 +98,10 @@ export default function(state = initState, action) {
             return requestSection(state, action.section);
         case RECEIVE_SECTION:
             return receiveSection(state, action.section, action.data, action.receivedAt);
+
+        case PAYMENT_DELETE_CARD:
+            return paymentDeleteCard(state, action.cardId);
+
         default:
             return state;
     }

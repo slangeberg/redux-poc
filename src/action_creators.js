@@ -1,9 +1,15 @@
 import fetch from 'isomorphic-fetch'
 
+//Navigation actions
 export const INIT = 'INIT';
 export const SELECT_SECTION = 'SELECT_SECTION';
 export const REQUEST_SECTION = 'REQUEST_SECTION';
 export const RECEIVE_SECTION = 'RECEIVE_SECTION';
+
+// Payment actions
+export const PAYMENT_DELETE_CARD = 'PAYMENT_DELETE_CARD';
+
+////
 
 const dataDir = 'data';
 
@@ -85,4 +91,14 @@ export function goToSection(section) {
             return dispatch(fetchSection(section))
         }
     }
+}
+
+/////// PAYMENT actions - Would move to new file /////////
+
+export function deleteCard(cardId){
+    console.log('actions.deleteCard( ', cardId);
+    return {
+        type: PAYMENT_DELETE_CARD,
+        cardId: cardId
+    };
 }

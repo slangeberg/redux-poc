@@ -4,6 +4,7 @@
             "label": "Credit Cards",
             "data": [
                 {
+                    "id": 1,
                     "vendor": "Visa",
                     "description": "My personal card",
                     "cardNumber": "xxxx-xxxx-xxxx-1121",
@@ -12,6 +13,7 @@
                         "rail"
                     ]
                 }, {
+                    "id": 2,
                     "vendor": "Master Card",
                     "description": "My business card",
                     "cardNumber": "xxxx-xxxx-xxxx-3211",
