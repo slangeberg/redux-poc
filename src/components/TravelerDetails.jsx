@@ -2,6 +2,8 @@ import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 
+import ContactForm from './ContactForm';
+
 import * as actionCreators from '../action_creators';
 
 const SECTION_NAME = 'travelerDetails';
@@ -56,6 +58,7 @@ const TravelerDetailSection = React.createClass({
                         )
                     })
                 }
+                <ContactForm handleSubmit={() => console.log('TravelerDetails.handleSubmit()')} />
             </div>
         ) : <div/>;
     }
