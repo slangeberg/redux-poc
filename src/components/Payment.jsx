@@ -54,11 +54,13 @@ const CreditCards = React.createClass({
                 <hr/>
                 <h4>{section.label}</h4>
                 {
-                    cards.map(card => {
-                        return (
-                            <CreditCard key={card.number} card={card} {...this.props} />
-                        )
-                    })
+                    cards.length > 0
+                        ? cards.map(card => {
+                            return (
+                                <CreditCard key={card.number} card={card} {...this.props} />
+                            )
+                        })
+                        : <p>-- No Cards --</p>
                 }
             </div>
         ) : <div/>;

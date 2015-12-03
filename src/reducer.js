@@ -79,17 +79,22 @@ function receiveSection(state, section, data, receivedAt) {
 /////// PAYMENT reducers - Would move to new file /////////
 
 function paymentDeleteCard(state, cardId){
-    //console.log('reducer.paymentDeleteCard( ', cardId, ', state: ', state.toJS());
-    let path = ['data', 'payment', 'creditCards', 'data'];
-    let cards = state.getIn(path);
-    let entry = cards.findEntry((card) => card.id == card.id);
+    let paymentPath = ['data', 'payment'];
+    let payment = state.getIn(paymentPath);
 
-    cards = cards.delete(entry[0])
+    let cards = payment.getIn(['creditCards', 'data']);
+    cards = cards.delete(cards.findIndex((card) => card.id == card.id));
 
-    state = state.setIn(path, cards);
+    //update with new List
+    payment = payment.merge({
+        creditCards: {
+            data: cards
+        },
+        hasChanges: true
+    });
+    state = state.setIn(paymentPath, payment);
 
     console.log('reducer.paymentDeleteCard() - cards (after): ', cards);
-    //console.log('reducer.paymentDeleteCard() - cards.tojs(): ', cards.toJS());
 
     return state;
 }
