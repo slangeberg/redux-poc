@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import CreditCardForm from './CreditCardForm';
+import CreditCardForm2 from './CreditCardForm2';
 
 import * as actionCreators from '../action_creators';
 
@@ -72,23 +72,12 @@ const CreditCard = React.createClass({
     mixins: [PureRenderMixin],
 
     render: function() {
-/*
- {
- "vendor": "Master Card",
- "description": "My business card",
- "cardNumber": "xxxx-xxxx-xxxx-3211",
- "preferred": [
- "car"
- ]
- }
- */
-        const card = this.props.card;
-
+        const { card } = this.props;
         return (
             <div>
                 {
                     card.isEditMode ? (
-                        <CreditCardForm card={card} handleSubmit={() => console.log('handleSubmit() - card: ', card)}/>
+                        <CreditCardForm2 card={card} handleSubmit={() => console.log('handleSubmit() - card: ', card)}/>
                     ) : (
                         <p>
                             #: {card.cardNumber} <b>{card.vendor}</b>&nbsp;&nbsp;

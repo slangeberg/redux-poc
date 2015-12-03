@@ -14,6 +14,9 @@
                     ]
                 }, {
                     "id": 2,
+
+                    "isEditMode": true,
+
                     "vendor": "Master Card",
                     "description": "My business card",
                     "cardNumber": "xxxx-xxxx-xxxx-3211",
