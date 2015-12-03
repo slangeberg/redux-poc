@@ -79,7 +79,18 @@ function receiveSection(state, section, data, receivedAt) {
 /////// PAYMENT reducers - Would move to new file /////////
 
 function paymentDeleteCard(state, cardId){
-    console.log('reducer.paymentDeleteCard( ', cardId);
+    //console.log('reducer.paymentDeleteCard( ', cardId, ', state: ', state.toJS());
+    let path = ['data', 'payment', 'creditCards', 'data'];
+    let cards = state.getIn(path);
+    let entry = cards.findEntry((card) => card.id == card.id);
+
+    cards = cards.delete(entry[0])
+
+    state = state.setIn(path, cards);
+
+    console.log('reducer.paymentDeleteCard() - cards (after): ', cards);
+    //console.log('reducer.paymentDeleteCard() - cards.tojs(): ', cards.toJS());
+
     return state;
 }
 
