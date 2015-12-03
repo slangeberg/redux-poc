@@ -57,7 +57,7 @@ const CreditCards = React.createClass({
                     cards.length > 0
                         ? cards.map(card => {
                             return (
-                                <CreditCard key={card.number} card={card} {...this.props} />
+                                <CreditCard key={card.id} card={card} {...this.props} />
                             )
                         })
                         : <p>-- No Cards --</p>
@@ -77,7 +77,7 @@ const CreditCard = React.createClass({
             <div>
                 {
                     card.isEditMode ? (
-                        <CreditCardForm2 card={card} handleSubmit={() => console.log('handleSubmit() - card: ', card)}/>
+                        <CreditCardForm2 initialValues={card} onSubmit={() => console.log('onSubmit() - card: ', card)}/>
                     ) : (
                         <p>
                             #: {card.cardNumber} <b>{card.vendor}</b>&nbsp;&nbsp;
@@ -85,6 +85,9 @@ const CreditCard = React.createClass({
                         </p>
                     )
                 }
+
+                <hr/>
+
             </div>
         );
     }
