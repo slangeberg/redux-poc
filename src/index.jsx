@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Router, {Route} from 'react-router';
 
-import {combineReducers, createStore, applyMiddleware} from 'redux';
+import {combineReducers, compose, createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 
@@ -49,8 +49,9 @@ const reducer = combineReducers({
     form: formReducer
 });
 
-const createStoreWithMiddleware = applyMiddleware(
-    thunk
+const createStoreWithMiddleware = compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f  //NOICE
 )(createStore);
 const store = createStoreWithMiddleware(reducer);
 
