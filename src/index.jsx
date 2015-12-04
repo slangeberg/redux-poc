@@ -23,6 +23,19 @@ import {PaymentContainer} from './components/Payment';
 
 //import * from 'bootstrap/css/bootstrap.css';
 
+//////// IE shims ///////////////
+
+if (!window.location.origin) {
+    window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+}
+if (!console) {
+    console = {
+        log: () => {},
+        error: () => {},
+        warn: () => {}
+    }
+}
+
 
 ////////////////
 
