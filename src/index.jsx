@@ -1,3 +1,5 @@
+import es6Promise from 'es6-promise';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router, {Route} from 'react-router';
@@ -24,6 +26,8 @@ import {PaymentContainer} from './components/Payment';
 //import * from 'bootstrap/css/bootstrap.css';
 
 //////// IE shims ///////////////
+
+es6Promise.polyfill();
 
 if (!window.location.origin) {
     window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
