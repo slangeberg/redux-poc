@@ -2,8 +2,7 @@ import React from 'react/addons';
 import Voting from '../../src/components/Voting';
 import {expect} from 'chai';
 
-const {renderIntoDocument, scryRenderedDOMComponentsWithTag, Simulate}
-    = React.addons.TestUtils;
+const {renderIntoDocument, scryRenderedDOMComponentsWithTag, Simulate} = React.addons.TestUtils;
 
 describe('Voting', () => {
 

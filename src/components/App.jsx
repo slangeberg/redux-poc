@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 import {NavigationMenuContainer} from './NavigationMenu';
 
+import SearchBox from './SearchBox'
+
 export const App = React.createClass({
 
     //NOT using PureRenderMixin here, for now - route changes may not fire:
@@ -13,10 +15,14 @@ export const App = React.createClass({
             <div>
                 <div>
                     Current Selection: {this.props.navigation.selectedSection}
+
+                    <SearchBox/>
                 </div>
                 <div>
                     <NavigationMenuContainer />
+
                     <div className="main">
+
                         {this.props.children}
                     </div>
                 </div>
