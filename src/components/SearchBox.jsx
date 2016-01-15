@@ -8,7 +8,7 @@ export default React.createClass({
             isMouseOverMenu: false,
             selection: "",
             textValue: "",
-            items: ['Apples', 'Oranges', 'Mangoes']
+            items: []
         };
     },
 
@@ -29,11 +29,7 @@ export default React.createClass({
 
     render: function () {
         const comp = this
-        const filteredItems = this.state.textValue
-            ? this.state.items.filter(item =>
-                item.toLowerCase().indexOf(this.state.textValue.toLowerCase()) >= 0
-            )
-            : []
+
         return (
             <div>
                 <div>
@@ -44,7 +40,7 @@ export default React.createClass({
                 </div>
                 <div>
                     Label: <br/>
-                    <input defaultValue="Enter search..." value={this.state.textValue}
+                    <input value={this.state.textValue}
                            onClick={this.handleTextClick}
                            onBlur={e => {
                                 console.log('input.blur');
@@ -59,6 +55,21 @@ export default React.createClass({
                                 this.state.textValue = e.target.value
                                 this.state.isSelected = true
 
+                                if (this.state.textValue) {
+                                    this.state.isLoading = true
+
+                                    //Backend 'search'
+                                    setTimeout(() => {
+                                        this.state.isLoading = false
+
+                                        this.state.items = [
+                                            'Apples', 'Bananas', 'Oranges', 'Mangoes', 'Pears', 'Peaches'
+                                        ].filter(item =>
+                                            item.toLowerCase().indexOf(this.state.textValue.toLowerCase()) >= 0
+                                        )
+                                        this.setState(this.state)
+                                    }, 250)
+                                }
                                 this.setState(this.state)
                             }}
                     />
@@ -79,8 +90,15 @@ export default React.createClass({
                             ////}
                             //this.setState(this.state)
                         }}>
+                        {this.state.textValue ? "" : "Please type something"}
+                        {this.state.isLoading
+                            ? "Loading..."
+                            : (
+                                this.state.items.length > 0 ? "" : "No results found"
+                            )
+                        }
                         <ul>
-                            {filteredItems.map((item) => {
+                            {this.state.items.map((item) => {
                                 //console.log('item.. onMenuItemClick: ', comp.onMenuItemClick);
                                 return (
                                     <li key={item}>
